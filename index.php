@@ -69,14 +69,10 @@ class Farm
         for ($i = 0; $i < 10; $i++)
         {
             $this->addAnimal(Cow::class);
-            $animalID = $this->giveID();
-            $this->animals[Cow::class][$i]->setID($animalID);
         }
         for ($i = 0; $i < 20; $i++)
         {
             $this->addAnimal(Chicken::class);
-            $animalID = $this->giveID();
-            $this->animals[Chicken::class][$i]->setID($animalID);
         }
     }
     public function addAnimal($className)
@@ -86,6 +82,8 @@ class Farm
             $this->animals[$className] = [];
         }
         $newAnimal = $this->animals[$className][] = new $className;
+        $animalID = $this->giveID();
+        $newAnimal->setID($animalID);
         if (!isset($this->products[$newAnimal->getProductType()]))
         {
             $this->products[$newAnimal->getProductType()] = 0;
